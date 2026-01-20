@@ -6,7 +6,6 @@ import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 
-import javax.annotation.Nonnull;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -45,14 +44,6 @@ public class MultipleCustomUIHud extends CustomUIHud {
             } catch (IllegalAccessException | InvocationTargetException e) {
                 throw new RuntimeException(e);
             }
-        }
-    }
-
-    @Override
-    public void update(boolean clear, @Nonnull UICommandBuilder commandBuilder) {
-        for (String key : customHuds.keySet()) {
-            var hud = customHuds.get(key);
-            hud.update(clear, commandBuilder);
         }
     }
 
