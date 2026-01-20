@@ -1,19 +1,12 @@
 package com.buuz135.mhud;
 
-
-
-import com.buuz135.mhud.testing.CustomTickingSystem;
-import com.hypixel.hytale.protocol.packets.interface_.CustomHud;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.entity.entities.player.hud.CustomUIHud;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 
-
 import javax.annotation.Nonnull;
-import java.util.HashMap;
-
 
 public class MultipleHUD extends JavaPlugin {
 
@@ -35,25 +28,27 @@ public class MultipleHUD extends JavaPlugin {
     }
 
     public void setCustomHud(Player player, PlayerRef playerRef, String hudIdentifier, CustomUIHud customHud) {
-        var currentCustomHud = player.getHudManager().getCustomHud();
+        CustomUIHud currentCustomHud = player.getHudManager().getCustomHud();
         if (currentCustomHud instanceof MultipleCustomUIHud multipleCustomUIHud) {
-            multipleCustomUIHud.getCustomHuds().put(hudIdentifier, customHud);
-            player.getHudManager().setCustomHud(playerRef, multipleCustomUIHud);
-            multipleCustomUIHud.show();
+            multipleCustomUIHud.add(hudIdentifier, customHud);
         } else {
-            var huds = new HashMap<String, CustomUIHud>();
-            huds.put(hudIdentifier, customHud);
-            if (currentCustomHud != null) huds.put("Unknown", currentCustomHud);
-            player.getHudManager().setCustomHud(playerRef, new MultipleCustomUIHud(playerRef, huds));
+            MultipleCustomUIHud mchud = new MultipleCustomUIHud(playerRef);
+            player.getHudManager().setCustomHud(playerRef, mchud);
+            mchud.add(hudIdentifier, customHud);
+            if (currentCustomHud != null) {
+                mchud.add("Unknown", currentCustomHud);
+            }
         }
     }
 
+    @Deprecated
     public void hideCustomHud(Player player, PlayerRef playerRef, String hudIdentifier) {
+        hideCustomHud(player, hudIdentifier);
+    }
+    public void hideCustomHud(Player player, String hudIdentifier) {
         var currentCustomHud = player.getHudManager().getCustomHud();
         if (currentCustomHud instanceof MultipleCustomUIHud multipleCustomUIHud) {
-            multipleCustomUIHud.getCustomHuds().remove(hudIdentifier);
-            player.getHudManager().setCustomHud(playerRef, multipleCustomUIHud);
-            multipleCustomUIHud.show();
+            multipleCustomUIHud.remove(hudIdentifier);
         }
     }
 }
