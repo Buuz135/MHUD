@@ -150,7 +150,7 @@ public class MultipleCustomUIHud extends CustomUIHud {
         UICommandBuilder commandBuilder = new UICommandBuilder();
 
         String normalizedId = normalizedIds.computeIfAbsent(identifier, i -> i.replaceAll("[^a-zA-Z0-9]", ""));
-        CustomUIHud existingHud = customHuds.put(identifier, hud);
+        CustomUIHud existingHud = customHuds.get(identifier);
         if (existingHud != hud) {
             customHuds.put(identifier, hud);
         }
