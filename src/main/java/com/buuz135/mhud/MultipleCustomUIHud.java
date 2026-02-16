@@ -9,6 +9,7 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -168,5 +169,10 @@ public class MultipleCustomUIHud extends CustomUIHud {
         UICommandBuilder commandBuilder = new UICommandBuilder();
         commandBuilder.remove("#MultipleHUD #" + normalizedId);
         update(false, commandBuilder);
+    }
+
+    @Nullable
+    public CustomUIHud get(@NonNullDecl String identifier) {
+        return customHuds.get(identifier);
     }
 }
