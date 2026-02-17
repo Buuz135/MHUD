@@ -3,6 +3,7 @@
   "Name": "MultipleHUD",
   "Version": "1.0.5",
   "Description": "A simple mod that allows you to have multiple HUDs present at once.",
+  "ServerVersion": "2026.02.17-255364b8e",
   "Authors": [
     {
       "Name": "Buuz135"
