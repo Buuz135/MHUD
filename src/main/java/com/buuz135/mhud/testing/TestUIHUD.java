@@ -10,7 +10,7 @@ public class TestUIHUD extends CustomUIHud {
     private final String file;
 
     public TestUIHUD(@NonNullDecl PlayerRef playerRef, String file) {
-        super(playerRef);
+        super(playerRef, file);
         this.file = file;
     }
 

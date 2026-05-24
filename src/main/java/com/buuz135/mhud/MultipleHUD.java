@@ -28,17 +28,7 @@ public class MultipleHUD extends JavaPlugin {
     }
 
     public void setCustomHud(Player player, PlayerRef playerRef, String hudIdentifier, CustomUIHud customHud) {
-        CustomUIHud currentCustomHud = player.getHudManager().getCustomHud();
-        if (currentCustomHud instanceof MultipleCustomUIHud multipleCustomUIHud) {
-            multipleCustomUIHud.add(hudIdentifier, customHud);
-        } else {
-            MultipleCustomUIHud mchud = new MultipleCustomUIHud(playerRef);
-            player.getHudManager().setCustomHud(playerRef, mchud);
-            mchud.add(hudIdentifier, customHud);
-            if (currentCustomHud != null) {
-                mchud.add("Unknown", currentCustomHud);
-            }
-        }
+        player.getHudManager().addCustomHud(playerRef, customHud);
     }
 
     @Deprecated
@@ -46,10 +36,6 @@ public class MultipleHUD extends JavaPlugin {
         hideCustomHud(player, hudIdentifier);
     }
     public void hideCustomHud(Player player, String hudIdentifier) {
-        var currentCustomHud = player.getHudManager().getCustomHud();
-
-        if (currentCustomHud instanceof MultipleCustomUIHud multipleCustomUIHud) {
-            multipleCustomUIHud.remove(hudIdentifier);
-        }
+        player.getHudManager().removeCustomHud(player.getPlayerRef(), hudIdentifier);
     }
 }

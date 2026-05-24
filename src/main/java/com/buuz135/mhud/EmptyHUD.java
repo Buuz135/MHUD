@@ -9,7 +9,7 @@ import javax.annotation.Nonnull;
 public class EmptyHUD extends CustomUIHud {
 
     public EmptyHUD(PlayerRef playerRef) {
-        super(playerRef);
+        super(playerRef, "empty");
     }
 
     @Override
